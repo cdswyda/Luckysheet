@@ -50,6 +50,7 @@ const uglifyOptions = {
 const babelConfig = {
     compact:false,
     babelHelpers: 'bundled',
+    // exclude: /node_modules\/(?!(flatpickr)\/)/, // Only compile our source code
     exclude: 'node_modules/**', // Only compile our source code
     plugins: [
     ],
