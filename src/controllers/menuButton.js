@@ -39,6 +39,8 @@ import Store from '../store';
 import locale from '../locale/locale';
 import {checkTheStatusOfTheSelectedCells} from '../global/api';
 
+import epointInsert from './epointInsert';
+
 const menuButton = {
     "menu": '<div class="luckysheet-cols-menu luckysheet-rightgclick-menu luckysheet-menuButton ${subclass} luckysheet-mousedown-cancel" id="luckysheet-icon-${id}-menuButton">${item}</div>',
     // "item": '<div itemvalue="${value}" itemname="${name}" class="luckysheet-cols-menuitem ${sub} luckysheet-mousedown-cancel"><div class="luckysheet-cols-menuitem-content luckysheet-mousedown-cancel" style="padding: 3px 0px 3px 1px;"><span style="margin-right:3px;width:13px;display:inline-block;" class="icon luckysheet-mousedown-cancel"></span> ${name} <span class="luckysheet-submenu-arrow luckysheet-mousedown-cancel" style="user-select: none;">${example}</span></div></div>',
@@ -2878,6 +2880,64 @@ const menuButton = {
                 _this.rightclickmenu.removeClass("luckysheet-cols-menuitem-hover");
                 $(this).hide();
             }
+        });
+
+        // epoint clear
+        $('#luckysheet-icon-epoint-clear').on('click', function () {
+            // console.log('clear');
+            $("#luckysheet-delete-text").click();
+        });
+        // epoint 插入
+        $("#luckysheet-icon-epoint-insert").mousedown(function(e){
+            hideMenuByCancel(e);
+            e.stopPropagation();
+        }).click(function(){
+            let menuButtonId = $(this).attr("id")+"-menuButton";
+            let $menuButton = $("#"+menuButtonId);
+            if ($menuButton.length == 0){
+                let itemset = _this.createButtonMenu(epointInsert.menuItems);
+
+                let menu = replaceHtml(_this.menu, {"id": "epoint-insert", "item": itemset, "subclass": "", "sub": ""});
+
+                let subitemset = _this.createButtonMenu(epointInsert.otherMenuItems);
+                let submenu = replaceHtml(_this.menu, {"id": "epoint-insert-more", "item": subitemset, "subclass": "luckysheet-menuButton-sub"})
+
+                $("body").append(menu + submenu);
+                $menuButton = $("#"+menuButtonId).width(150);
+                // _this.focus($menuButton, '');
+
+                $menuButton.on("click", ".luckysheet-cols-menuitem", function(){
+                    let $t = $(this), itemvalue = $t.attr("itemvalue");
+                    if (itemvalue === 'epoint-insert-more') {
+                        return;
+                    }
+                    $menuButton.hide();
+                    luckysheetContainerFocus();
+
+                    epointInsert.handle(itemvalue);
+                    if (window.EpointSheetDesigner && typeof window.EpointSheetDesigner.eventHandle === 'function') {
+                        window.EpointSheetDesigner.eventHandle.call(this, itemvalue);
+                    }
+                });
+
+                $('#luckysheet-icon-epoint-insert-other-menuButton').on('click', '.luckysheet-cols-menuitem', function () {
+                    let itemvalue = $(this).attr("itemvalue");
+                    $menuButton.hide();
+                    $("#luckysheet-icon-epoint-insert-other-menuButton").hide();
+                    luckysheetContainerFocus();
+
+                    epointInsert.handle(itemvalue);
+                })
+            }
+
+            let userlen = $(this).outerWidth();
+            let tlen = $menuButton.outerWidth();
+
+            let menuleft = $(this).offset().left;
+            if(tlen > userlen && (tlen + menuleft) > $("#" + Store.container).width()){
+                menuleft = menuleft - tlen + userlen;
+            }
+            mouseclickposition($menuButton, menuleft, $(this).offset().top+25, "lefttop");
         });
     },
     getQKBorder: function(width, type, color){

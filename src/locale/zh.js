@@ -9116,6 +9116,8 @@ export default {
 
         cellFormat:"设置单元格格式",
         print:"打印",
+        epointClear: '清除',
+        epointInsert: '插入'
     },
     alternatingColors:{
         applyRange: '应用范围',

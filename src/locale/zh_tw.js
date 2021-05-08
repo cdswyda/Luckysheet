@@ -9113,7 +9113,9 @@ export default {
         toolMoreTip        : '更多功能',
         moreOptions        : '更多選項',
         cellFormat         : '設定儲存格格式',
-        print              : '列印'
+        print              : '列印',
+        epointClear        : '清除',
+        print              : '插入'
     },
     alternatingColors: {
         applyRange        : '應用範圍',

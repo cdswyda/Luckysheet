@@ -8891,6 +8891,8 @@ export default {
 
         cellFormat:"Cell format config",
         print:"Print",
+        epointClear: 'clear',
+        epointInsert: 'insert'
     },
     alternatingColors:{
         applyRange: 'Apply to range',
