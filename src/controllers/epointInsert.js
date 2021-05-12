@@ -1,4 +1,6 @@
 import Store from '../store';
+import luckysheetPostil from './postil';
+
 /**
  * 插入填报说明
  */
@@ -10,9 +12,32 @@ function showFillInDescription() {
         }
     }
 }
+/**
+ * 插入批注
+ */
+function insertPostil() {
+    luckysheetPostil.removeActivePs();
+
+    let last = Store.luckysheet_select_save[Store.luckysheet_select_save.length - 1];
+
+    let row_index = last['row_focus'];
+    if (row_index == null) {
+        row_index = last['row'][0];
+    }
+
+    let col_index = last['column_focus'];
+    if (col_index == null) {
+        col_index = last['column'][0];
+    }
+
+    luckysheetPostil.newPs(row_index, col_index);
+}
 
 const handlers = {
-    'fill-in-description': showFillInDescription
+    // 填报说明
+    'fill-in-description': showFillInDescription,
+    // 批注
+    postil: insertPostil
 };
 
 const epointInsert = {
@@ -40,7 +65,7 @@ const epointInsert = {
     ],
     otherMenuItems: [
         { text: '身份证号', value: 'idcard', example: '' },
-        { text: '手机号', value: 'phone', example: '' },
+        { text: '手机号', value: 'phone', example: '' }
     ],
     handle: function(itemValue) {
         const args = [].slice.call(arguments, 1);
