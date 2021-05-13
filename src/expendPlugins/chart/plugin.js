@@ -16,8 +16,74 @@ import {
 } from '../../controllers/sheetMove';
 import { isEditMode } from '../../global/validate';
 import luckysheetsizeauto from '../../controllers/resize';
-let _rowLocation = rowLocation
-let _colLocation = colLocation
+let _rowLocation = rowLocation;
+let _colLocation = colLocation;
+
+;(function (document) {
+  var currentScript = 'currentScript';
+
+  // If browser needs currentScript polyfill, add get currentScript() to the document object
+  if (!(currentScript in document)) {
+    Object.defineProperty(document, currentScript, {
+      get: function () {
+        // IE 8-10 support script readyState
+        // IE 11+ support stack trace
+        try {
+          throw new Error();
+        }
+        catch (err) {
+          // Find the second match for the "at" string to get file src url from stack.
+          // Specifically works with the format of stack traces in IE.
+          var i = 0,
+            stackDetails = (/.*at [^(]*\((.*):(.+):(.+)\)$/ig).exec(err.stack),
+            scriptLocation = (stackDetails && stackDetails[1]) || false,
+            line = (stackDetails && stackDetails[2]) || false,
+            currentLocation = document.location.href.replace(document.location.hash, ''),
+            pageSource,
+            inlineScriptSourceRegExp,
+            inlineScriptSource,
+            scripts = document.getElementsByTagName('script'); // Live NodeList collection
+
+          if (scriptLocation === currentLocation) {
+            pageSource = document.documentElement.outerHTML;
+            inlineScriptSourceRegExp = new RegExp('(?:[^\\n]+?\\n){0,' + (line - 2) + '}[^<]*<script>([\\d\\D]*?)<\\/script>[\\d\\D]*', 'i');
+            inlineScriptSource = pageSource.replace(inlineScriptSourceRegExp, '$1').trim();
+          }
+
+          for (; i < scripts.length; i++) {
+            // If ready state is interactive, return the script tag
+            if (scripts[i].readyState === 'interactive') {
+              return scripts[i];
+            }
+
+            // If src matches, return the script tag
+            if (scripts[i].src === scriptLocation) {
+              return scripts[i];
+            }
+
+            // If inline source matches, return the script tag
+            if (
+              scriptLocation === currentLocation &&
+              scripts[i].innerHTML &&
+              scripts[i].innerHTML.trim() === inlineScriptSource
+            ) {
+              return scripts[i];
+            }
+          }
+
+          // If no match, return null
+          return null;
+        }
+      }
+    });
+  }
+})(document);
+const currentPath = (() => {
+    let currentScript = document.currentScript;
+    let src = currentScript.src;
+    src = src.substring(0, src.lastIndexOf('/') + 1);
+    return src;
+})();
 
 // Dynamically load dependent scripts and styles
 const dependScripts = [
@@ -25,13 +91,13 @@ const dependScripts = [
     'https://unpkg.com/vuex@3.4.0',
     'https://cdn.bootcdn.net/ajax/libs/element-ui/2.13.2/index.js',
     'https://cdn.bootcdn.net/ajax/libs/echarts/4.8.0/echarts.min.js',
-    'expendPlugins/chart/chartmix.umd.min.js',
+    currentPath + 'expendPlugins/chart/chartmix.umd.min.js',
     // 'http://26.26.26.1:8000/chartmix.umd.js'
 ]
 
 const dependLinks = [
     'https://cdn.bootcdn.net/ajax/libs/element-ui/2.13.2/theme-chalk/index.css',
-    'expendPlugins/chart/chartmix.css',
+    currentPath + 'expendPlugins/chart/chartmix.css',
     // 'http://26.26.26.1:8000/chartmix.css'
 ]
 
