@@ -1,5 +1,15 @@
 import Store from '../store';
 import luckysheetPostil from './postil';
+import hyperlinkCtrl from './hyperlinkCtrl';
+import { createLuckyChart, hideAllNeedRangeShow } from '../expendPlugins/chart/plugin';
+import {
+    checkProtectionLockedRangeList,
+    checkProtectionAllSelected,
+    checkProtectionSelectLockedOrUnLockedCells,
+    checkProtectionNotEnable,
+    checkProtectionAuthorityNormal
+} from './protection';
+import pivotTable from './pivotTable';
 
 /**
  * 插入填报说明
@@ -11,6 +21,37 @@ function showFillInDescription() {
             show(Store.currentSheetIndex);
         }
     }
+}
+/**
+ * 插入图片
+ * @returns
+ */
+function insertImage() {
+    if (!checkProtectionAuthorityNormal(Store.currentSheetIndex, 'editObjects')) {
+        return;
+    }
+    $('#luckysheet-imgUpload').click();
+}
+/**
+ * 插入图表
+ */
+function insertChart() {
+    createLuckyChart();
+}
+/**
+ * 插入链接
+ */
+function insertLink() {
+    if (!checkProtectionNotEnable(Store.currentSheetIndex)) {
+        return;
+    }
+
+    if (Store.luckysheet_select_save == null || Store.luckysheet_select_save.length == 0) {
+        return;
+    }
+
+    hyperlinkCtrl.createDialog();
+    hyperlinkCtrl.init();
 }
 /**
  * 插入批注
@@ -33,11 +74,24 @@ function insertPostil() {
     luckysheetPostil.newPs(row_index, col_index);
 }
 
+function insertPivotTable() {
+    if (!checkProtectionAuthorityNormal(Store.currentSheetIndex, 'usePivotTablereports')) {
+        return;
+    }
+    // TODO 这里需要 点击事件的事件对象 不知道有撒用 暂时传个 null
+    pivotTable.createPivotTable(null);
+}
+
 const handlers = {
     // 填报说明
     'fill-in-description': showFillInDescription,
+    // ======================
+    image: insertImage,
+    chart: insertChart,
+    link: insertLink,
     // 批注
-    postil: insertPostil
+    postil: insertPostil,
+    pivotTable: insertPivotTable
 };
 
 const epointInsert = {
@@ -61,7 +115,7 @@ const epointInsert = {
         { text: '图表', value: 'chart', example: '' },
         { text: '链接', value: 'link', example: '' },
         { text: '批注', value: 'postil', example: '' },
-        { text: '数据透视表', value: '', example: '' }
+        { text: '数据透视表', value: 'pivotTable', example: '' }
     ],
     otherMenuItems: [
         { text: '身份证号', value: 'idcard', example: '' },
