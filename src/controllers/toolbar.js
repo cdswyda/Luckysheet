@@ -669,7 +669,7 @@ export function createToolbarHtml() {
             style="user-select: none;">
                 <div class="luckysheet-toolbar-menu-button-inner-box luckysheet-inline-block"
                 style="user-select: none;">
-                    
+
                     <div class="luckysheet-toolbar-menu-button-caption luckysheet-inline-block"
                     style="user-select: none;">
                         <div class="luckysheet-icon luckysheet-inline-block " style="user-select: none;">
@@ -678,7 +678,7 @@ export function createToolbarHtml() {
                             </div>
                         </div>
                     </div>
-                    
+
                 </div>
             </div>
         </div>
@@ -717,7 +717,7 @@ export function createToolbarHtml() {
             style="user-select: none;">
                 <div class="luckysheet-toolbar-menu-button-inner-box luckysheet-inline-block"
                 style="user-select: none;">
-                    
+
                     <div class="luckysheet-icon luckysheet-inline-block " style="user-select: none;">
                         <div aria-hidden="true" class="luckysheet-icon-img-container luckysheet-icon-img luckysheet-icon-autofilter iconfont luckysheet-iconfont-geshitiaojian"
                         style="user-select: none;">
@@ -786,7 +786,7 @@ export function createToolbarHtml() {
             style="user-select: none;">
                 <div class="luckysheet-toolbar-button-inner-box luckysheet-inline-block"
                 style="user-select: none;">
-   
+
                     <div class="luckysheet-icon luckysheet-inline-block " style="user-select: none;">
                         <div aria-hidden="true" class="luckysheet-icon-img-container luckysheet-icon-img luckysheet-icon-autofilter iconfont luckysheet-iconfont-sousuo"
                         style="user-select: none;">
@@ -821,7 +821,7 @@ export function createToolbarHtml() {
             style="user-select: none;">
                 <div class="luckysheet-toolbar-button-inner-box luckysheet-inline-block"
                 style="user-select: none;">
-   
+
                     <div class="luckysheet-icon luckysheet-inline-block " style="user-select: none;">
                         <div aria-hidden="true" class="luckysheet-icon-img-container luckysheet-icon-img luckysheet-icon-autofilter iconfont luckysheet-iconfont-dayin"
                         style="user-select: none;">
@@ -879,9 +879,11 @@ export function createToolbarHtml() {
             if (key === '|') {
                 // 应取前一个元素的的作为id
                 let prevKey = showtoolbarConfig[i - 1] || key;
-                buttonHTML.push(
-                    `<div id="toolbar-separator-${camel2split(prevKey)}" class="luckysheet-toolbar-separator luckysheet-inline-block" style="user-select: none;"></div>`
-                );
+                if (prevKey !== '|') {
+                    buttonHTML.push(
+                        `<div id="toolbar-separator-${camel2split(prevKey)}" class="luckysheet-toolbar-separator luckysheet-inline-block" style="user-select: none;"></div>`
+                    );
+                }
             } else {
                 buttonHTML.push(htmlMap[key]);
             }
@@ -906,7 +908,7 @@ export function createToolbarHtml() {
     if (JSON.stringify(showtoolbarConfig) !== '{}') {
         if(showtoolbarConfig.hasOwnProperty('undoRedo')){
             config.undo = config.redo = showtoolbarConfig.undoRedo;
-            delete showtoolbarConfig.undoRedo;
+            // delete showtoolbarConfig.undoRedo;
         }
         Object.assign(config, showtoolbarConfig);
     }
@@ -922,9 +924,11 @@ export function createToolbarHtml() {
         if (key === '|') {
             // 应取前一个元素的的作为id
             let prevKey = defaultToolbar[i - 1] || key;
-            buttonHTML.push(
-                `<div id="toolbar-separator-${camel2split(prevKey)}" class="luckysheet-toolbar-separator luckysheet-inline-block" style="user-select: none;"></div>`
-            );
+            if (prevKey !== '|') {
+                buttonHTML.push(
+                    `<div id="toolbar-separator-${camel2split(prevKey)}" class="luckysheet-toolbar-separator luckysheet-inline-block" style="user-select: none;"></div>`
+                );
+            }
         } else {
             buttonHTML.push(htmlMap[key]);
         }
