@@ -6742,3 +6742,5 @@ export function checkTheStatusOfTheSelectedCells(type,status){
 
     return flag;
 }
+
+export * as pako from 'pako';
