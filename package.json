@@ -50,7 +50,7 @@
     "docs:build": "vuepress build docs",
     "commit": "git-cz",
     "release": "standard-version",
-    "deploy": "npm run build && cp -afr dist/* ../../EpointFrame/epoint-ego/epoint-ego-web/src/main/webapp/ego/sheetdesign/js/lib/luckysheet"
+    "deploy": "npm run build && rm dist/index.html && cp -afr dist/* ../../EpointFrame/epoint-ego/epoint-ego-web/src/main/webapp/ego/sheetdesign/js/lib/luckysheet"
   },
   "files": [
     "dist"
