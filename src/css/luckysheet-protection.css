@@ -253,3 +253,48 @@
     height: 180px;
     display: none;
 }
+
+
+/* #region 新的保护 */
+#luckysheet-epoint-protection-dialog .luckysheet-modal-dialog-slider-content {
+    background-color: #fff;
+}
+.epoint-protection-list {
+    padding: 10px;
+}
+.epoint-protection-item {
+    display: block;
+    padding: 10px;
+    margin-bottom: 6px;
+    border: 1px solid #ddd;
+    cursor: pointer;
+    transition: all 0.2s ease-out;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.epoint-protection-item:hover {
+    background-color: #d2e6f7;
+}
+.epoint-protection-item-desc {
+    line-height: 1.5;
+}
+.epoint-protection-item-operate {
+
+}
+.epoint-protection-item-content {
+    color: #999;
+}
+.epoint-protection-item-remove {
+    vertical-align: top;
+    height: 30px;
+    width: 30px;
+    line-height: 30px;
+    text-align: center;
+    transition: all 0.2s ease-out;
+    font-size: 20px;
+}
+.epoint-protection-item-remove:hover {
+    color: #f65637;
+}
+/* #endregion */

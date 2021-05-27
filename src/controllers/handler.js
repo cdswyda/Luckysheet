@@ -27,6 +27,7 @@ import {hideMenuByCancel} from '../global/cursorPos';
 import { luckysheetdefaultstyle } from './constant';
 import {checkProtectionLockedRangeList,checkProtectionAllSelected,checkProtectionSelectLockedOrUnLockedCells,checkProtectionNotEnable,checkProtectionAuthorityNormal} from './protection';
 import { openCellFormatModel } from './cellFormat';
+import epointProtection from './epointProtection';
 
 import { 
     replaceHtml,

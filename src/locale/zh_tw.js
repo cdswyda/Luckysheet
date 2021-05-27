@@ -9115,7 +9115,8 @@ export default {
         cellFormat         : '設定儲存格格式',
         print              : '列印',
         epointClear        : '清除',
-        print              : '插入'
+        epointInsert       : '插入',
+        epointProtection   : '保護'
     },
     alternatingColors: {
         applyRange        : '應用範圍',

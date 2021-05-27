@@ -8,7 +8,10 @@ export const defaultToolbar = [
     'undo',
     'redo',
     'paintFormat',
+    'epointClear',
     '|',
+
+    'epointInsert', 'epointProtection', '|',
 
     'currencyFormat',
     'percentageFormat',
@@ -101,6 +104,8 @@ export const toolbarIdMap = {
 
     epointClear: '#luckysheet-icon-epoint-clear',
     epointInsert: '#luckysheet-icon-epoint-insert',
+
+    epointProtection: '#luckysheet-icon-epoint-protection'
 };
 
 // 创建工具栏按钮的html
@@ -843,7 +848,7 @@ export function createToolbarHtml() {
                     style="user-select: none;">
                         <div class="luckysheet-icon luckysheet-inline-block " style="user-select: none;">
                             <div aria-hidden="true" class="luckysheet-icon-img-container luckysheet-icon-epoint-clear"
-                            style="user-select: none;"><svg t="1620371538178" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor"><path d="M139.008 835.008h745.984c5.312 0 8 2.688 8 8v56c0 5.312-2.688 8-8 8H139.008c-5.312 0-8-2.688-8-8v-56c0-5.312 2.688-8 8-8z m6.016-184.128l129.024 100.8a44.16 44.16 0 0 0 27.072 9.344h315.392a43.712 43.712 0 0 0 34.688-16.96l239.488-306.56c23.104-29.504 17.92-72.32-11.712-95.36L573.056 103.04a67.968 67.968 0 0 0-95.488 11.712L133.312 555.52a67.968 67.968 0 0 0 11.712 95.424zM531.84 162.304l299.648 234.048-183.04 234.24-299.584-234.048 183.04-234.24zM304.512 453.312l299.584 234.048-1.28 1.664H310.848L192.512 596.608l112-143.36z"></path></svg></div>
+                            style="user-select: none;"><svg t="1620371538178" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor"><path d="M139.008 835.008h745.984c5.312 0 8 2.688 8 8v56c0 5.312-2.688 8-8 8H139.008c-5.312 0-8-2.688-8-8v-56c0-5.312 2.688-8 8-8z m6.016-184.128l129.024 100.8a44.16 44.16 0 0 0 27.072 9.344h315.392a43.712 43.712 0 0 0 34.688-16.96l239.488-306.56c23.104-29.504 17.92-72.32-11.712-95.36L573.056 103.04a67.968 67.968 0 0 0-95.488 11.712L133.312 555.52a67.968 67.968 0 0 0 11.712 95.424zM531.84 162.304l299.648 234.048-183.04 234.24-299.584-234.048 183.04-234.24zM304.512 453.312l299.584 234.048-1.28 1.664H310.848L192.512 596.608l112-143.36z"></path></svg></div>
                         </div>
                     </div>
                 </div>
@@ -858,6 +863,19 @@ export function createToolbarHtml() {
                     <div class="luckysheet-toolbar-menu-button-caption luckysheet-inline-block" style="user-select: none;">插入</div>
                     <div class="luckysheet-toolbar-menu-button-dropdown luckysheet-inline-block iconfont luckysheet-iconfont-xiayige"
                     style="user-select: none;margin-left: 0px;margin-right: 4px;">
+                    </div>
+                </div>
+            </div>
+        </div>`,
+        epointProtection: `<div class="luckysheet-toolbar-select luckysheet-toolbar-menu-button luckysheet-inline-block" data-tips="${toolbar.epointProtection}" id="luckysheet-icon-epoint-protection" role="button" style="user-select: none;">
+            <div class="luckysheet-toolbar-menu-button-outer-box luckysheet-inline-block" style="user-select: none;">
+                <div class="luckysheet-toolbar-menu-button-inner-box luckysheet-inline-block" style="user-select: none;">
+
+                    <div class="luckysheet-icon luckysheet-inline-block " style="user-select: none;">
+                        <div aria-hidden="true" class="luckysheet-icon-img-container luckysheet-icon-img luckysheet-icon-rotation-none iconfont luckysheet-iconfont-biaogesuoding" style="user-select: none;">
+                        </div>
+                    </div>
+                    <div class="luckysheet-toolbar-menu-button-dropdown luckysheet-inline-block iconfont luckysheet-iconfont-xiayige" style="user-select: none;">
                     </div>
                 </div>
             </div>

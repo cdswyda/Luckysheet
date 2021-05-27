@@ -83,6 +83,9 @@ export default function luckysheetsizeauto(isRefreshCanvas=true) {
         if($("#luckysheet-modal-dialog-slider-protection").is(":visible")){
             gridW -= $("#luckysheet-modal-dialog-slider-protection").outerWidth();
         }
+        if($("#luckysheet-epoint-protection-dialog").is(":visible")){
+            gridW -= $("#luckysheet-epoint-protection-dialog").outerWidth();
+        }
     }
 
     const _locale = locale();
