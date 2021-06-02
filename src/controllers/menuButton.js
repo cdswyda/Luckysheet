@@ -41,6 +41,7 @@ import {checkTheStatusOfTheSelectedCells} from '../global/api';
 
 import epointInsert from './epointInsert';
 import epointProtection from './epointProtection';
+import epointProtection2 from './epointProtection2';
 
 const menuButton = {
     "menu": '<div class="luckysheet-cols-menu luckysheet-rightgclick-menu luckysheet-menuButton ${subclass} luckysheet-mousedown-cancel" id="luckysheet-icon-${id}-menuButton">${item}</div>',
@@ -2966,6 +2967,43 @@ const menuButton = {
                         epointProtection.viewProtections();
                     }
                     
+                });
+            }
+
+            let userlen = $(this).outerWidth();
+            let tlen = $menuButton.outerWidth();
+
+            let menuleft = $(this).offset().left;
+            if(tlen > userlen && (tlen + menuleft) > $("#" + Store.container).width()){
+                menuleft = menuleft - tlen + userlen;
+            }
+            mouseclickposition($menuButton, menuleft, $(this).offset().top+25, "lefttop");
+        });
+        // epoint 保护2
+        $("#luckysheet-icon-epoint-protection2").mousedown(function(e){
+            hideMenuByCancel(e);
+            e.stopPropagation();
+        }).on('click', function(){
+            let menuButtonId = $(this).attr("id")+"-menuButton";
+            let $menuButton = $("#"+menuButtonId);
+            if ($menuButton.length == 0){
+                let itemset = _this.createButtonMenu(epointProtection2.menuItems);
+
+                let menu = replaceHtml(_this.menu, {"id": "epoint-protection2", "item": itemset, "subclass": "", "sub": ""});
+
+                $("body").append(menu);
+                $menuButton = $("#"+menuButtonId).width(150);
+                // _this.focus($menuButton, '');
+
+                $menuButton.on("click", ".luckysheet-cols-menuitem", function(){
+                    $menuButton.hide();
+                    luckysheetContainerFocus();
+                    let $t = $(this), itemvalue = $t.attr("itemvalue");
+                    if (itemvalue === 'protect') {
+                        epointProtection2.addProtections();
+                    } else if (itemvalue === 'cancel-protect') {
+                        epointProtection2.removeProtections();
+                    }
                 });
             }
 

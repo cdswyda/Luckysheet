@@ -11,7 +11,7 @@ export const defaultToolbar = [
     'epointClear',
     '|',
 
-    'epointInsert', 'epointProtection', '|',
+    'epointInsert', 'epointProtection', 'epointProtection2', '|',
 
     'currencyFormat',
     'percentageFormat',
@@ -105,7 +105,8 @@ export const toolbarIdMap = {
     epointClear: '#luckysheet-icon-epoint-clear',
     epointInsert: '#luckysheet-icon-epoint-insert',
 
-    epointProtection: '#luckysheet-icon-epoint-protection'
+    epointProtection: '#luckysheet-icon-epoint-protection',
+    epointProtection2: '#luckysheet-icon-epoint-protection2'
 };
 
 // 创建工具栏按钮的html
@@ -868,6 +869,19 @@ export function createToolbarHtml() {
             </div>
         </div>`,
         epointProtection: `<div class="luckysheet-toolbar-select luckysheet-toolbar-menu-button luckysheet-inline-block" data-tips="${toolbar.epointProtection}" id="luckysheet-icon-epoint-protection" role="button" style="user-select: none;">
+            <div class="luckysheet-toolbar-menu-button-outer-box luckysheet-inline-block" style="user-select: none;">
+                <div class="luckysheet-toolbar-menu-button-inner-box luckysheet-inline-block" style="user-select: none;">
+
+                    <div class="luckysheet-icon luckysheet-inline-block " style="user-select: none;">
+                        <div aria-hidden="true" class="luckysheet-icon-img-container luckysheet-icon-img luckysheet-icon-rotation-none iconfont luckysheet-iconfont-biaogesuoding" style="user-select: none;">
+                        </div>
+                    </div>
+                    <div class="luckysheet-toolbar-menu-button-dropdown luckysheet-inline-block iconfont luckysheet-iconfont-xiayige" style="user-select: none;">
+                    </div>
+                </div>
+            </div>
+        </div>`,
+        epointProtection2: `<div class="luckysheet-toolbar-select luckysheet-toolbar-menu-button luckysheet-inline-block" data-tips="${toolbar.epointProtection}" id="luckysheet-icon-epoint-protection2" role="button" style="user-select: none;">
             <div class="luckysheet-toolbar-menu-button-outer-box luckysheet-inline-block" style="user-select: none;">
                 <div class="luckysheet-toolbar-menu-button-inner-box luckysheet-inline-block" style="user-select: none;">
 

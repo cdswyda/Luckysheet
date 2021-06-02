@@ -20,6 +20,7 @@ import Store from '../store';
 import locale from '../locale/locale';
 import sheetmanage from '../controllers/sheetmanage';
 import epointProtection from '../controllers/epointProtection';
+import epointProtection2 from '../controllers/epointProtection2';
 
 function luckysheetDrawgridRowTitle(scrollHeight, drawHeight, offsetTop) {
     if (scrollHeight == null) {
@@ -1150,9 +1151,10 @@ let nullCellRender = function(r, c, start_r, start_c, end_r, end_c,luckysheetTab
     }
 
     if(fillStyle==null){
-        // 如果是此单元格是保护的 加个背景色
-        if (epointProtection.isInProtections(r, c)) {
-            luckysheetTableContent.fillStyle = `rgba(247,247,247,1)`;
+        // [epoint]如果是此单元格是保护的 加个背景色
+        if (epointProtection.isInProtections(r, c) || epointProtection2.isInProtections(r, c)) {
+            // luckysheetTableContent.fillStyle = `rgba(247,247,247,1)`;
+            luckysheetTableContent.fillStyle = epointProtection2.fillStyle;
         } else {
             luckysheetTableContent.fillStyle = "#FFFFFF";
         }
@@ -1307,8 +1309,9 @@ let cellRender = function(r, c, start_r, start_c, end_r, end_c, value, luckyshee
     // luckysheetTableContent.textBaseline = 'top';
     if(fillStyle==null){
         // 如果是此单元格是保护的 加个背景色
-        if (epointProtection.isInProtections(r, c)) {
+        if (epointProtection.isInProtections(r, c) || epointProtection2.isInProtections(r, c)) {
             luckysheetTableContent.fillStyle = `rgba(247,247,247,1)`;
+            luckysheetTableContent.fillStyle = epointProtection2.fillStyle;
         } else {
             luckysheetTableContent.fillStyle = "#FFFFFF";
         }

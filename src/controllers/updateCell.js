@@ -18,6 +18,7 @@ import Store from '../store';
 import server from './server';
 import method from '../global/method';
 import epointProtection  from './epointProtection';
+import epointProtection2  from './epointProtection2';
 
 export function luckysheetupdateCell(row_index1, col_index1, d, cover, isnotfocus) {
     if(!checkProtectionLocked(row_index1, col_index1, Store.currentSheetIndex)){
@@ -29,6 +30,9 @@ export function luckysheetupdateCell(row_index1, col_index1, d, cover, isnotfocu
         return;
     }
     // 新做的保护功能检查
+    if (!epointProtection2.checkAllowEdit(row_index1, col_index1, Store.currentSheetIndex)) {
+        return;
+    }
     if (!epointProtection.checkAllowEdit(row_index1, col_index1, Store.currentSheetIndex)) {
         return;
     }
