@@ -325,6 +325,38 @@ const epointProtection = {
 
         return allowEdit;
     },
+    /**
+     * 检查指定区域内是否包含被保护的单元格
+     * @param {rangList} rangList 选区数组
+     * @param {string | number | undefined} sheetId sheet的index
+     * @returns 是否全区域可编辑
+     */
+    checkRangeListAllowEdit(rangList, sheetId) {
+        if (sheetId == undefined) {
+            sheetId = Store.currentSheetIndex;
+        }
+        const file = Store.luckysheetfile[getSheetIndex(sheetId)];
+        if (file == null) {
+            return true;
+        }
+        if (!file.config || !file.config.protections || !file.config.protections.length) {
+            return true;
+        }
+        let result = true;
+        // 遍历每个选区
+        rangList.some((range) => {
+            for (let r = range.row[0]; r <= range.row[1]; r++) {
+                for (let c = range.column[0]; c <= range.column[1]; c++) {
+                    // 判断单个坐标位置是否在保护区域内 以及用户是否具备权限
+                    if (!epointProtection.checkAllowEdit(r, c, sheetId)) {
+                        result = false;
+                        return true;
+                    }
+                }
+            }
+        });
+        return result;
+    },
     // 检查用户是否具备权限
     _checkUserRight(r, c, protection) {
         // 依赖外部实现， 无实现则直接为true

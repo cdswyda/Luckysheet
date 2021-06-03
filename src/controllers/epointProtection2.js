@@ -160,6 +160,40 @@ const epointProtection2 = {
         // 单元格被保护的情况下 检查是否具备编辑权限
         return epointProtection2._checkUserRight(r, c);
     },
+    /**
+     * 检查指定区域内是否包含被保护的单元格
+     * @param {rangList} rangList 选区数组
+     * @param {string | number | undefined} sheetId sheet的index
+     * @returns 是否全区域可编辑
+     */
+    checkRangeListAllowEdit(rangList, sheetId) {
+        if (sheetId == undefined) {
+            sheetId = Store.currentSheetIndex;
+        }
+        const file = Store.luckysheetfile[getSheetIndex(sheetId)];
+        if (file == null) {
+            return true;
+        }
+        let result = true;
+        const data = file.data;
+
+        rangList.some((range) => {
+            for (let r = range.row[0]; r <= range.row[1]; r++) {
+                for (let c = range.column[0]; c <= range.column[1]; c++) {
+                    const cell = data[r][c];
+
+                    // 任意单元格是保护的则直接此区域不允许
+                    if (cell != null && cell.epoint && cell.epoint.protected && !epointProtection2._checkUserRight(r, c)) {
+                        result = false;
+                        return true;
+                    }
+                    
+                }
+            }
+        });
+
+        return result;
+    },
     // 检查用户是否具备权限
     _checkUserRight(r, c) {
         // 依赖外部实现， 无实现则直接为true

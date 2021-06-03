@@ -39,6 +39,8 @@ import {isInlineStringCell} from './inlineString';
 import {checkProtectionLockedRangeList, checkProtectionAllSelected,checkProtectionAuthorityNormal  } from './protection';
 import Store from '../store';
 import luckysheetConfigsetting from './luckysheetConfigsetting';
+import epointProtection  from './epointProtection';
+import epointProtection2  from './epointProtection2';
 
 export function rowColumnOperationInitial(){
 
@@ -1967,6 +1969,13 @@ export function rowColumnOperationInitial(){
 
     //清除单元格内容
     $("#luckysheet-delete-text").click(function(){
+        // 新版保护
+        if (!epointProtection2.checkRangeListAllowEdit(Store.luckysheet_select_save, Store.currentSheetIndex)) {
+            return;
+        }
+        if (!epointProtection.checkRangeListAllowEdit(Store.luckysheet_select_save, Store.currentSheetIndex)) {
+            return;
+        }
 
         if(!checkProtectionLockedRangeList(Store.luckysheet_select_save, Store.currentSheetIndex)){
             return;
