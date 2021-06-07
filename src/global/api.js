@@ -41,6 +41,8 @@ import imageCtrl from '../controllers/imageCtrl';
 import dayjs from "dayjs";
 import {getRangetxt } from '../methods/get';
 import {luckysheetupdateCell} from '../controllers/updateCell';
+import epointSummary from '../controllers/epointSummary';
+
 const IDCardReg = /^\d{6}(18|19|20)?\d{2}(0[1-9]|1[12])(0[1-9]|[12]\d|3[01])\d{3}(\d|X)$/i;
 
 /**
@@ -6744,3 +6746,6 @@ export function checkTheStatusOfTheSelectedCells(type,status){
 }
 
 export * as pako from 'pako';
+
+export { epointSummary } from '../controllers/epointSummary';
+export { epointProtection2 } from '../controllers/epointProtection2';

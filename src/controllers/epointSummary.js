@@ -584,3 +584,4 @@ const epointSummary = {
 };
 
 export default epointSummary;
+export { epointSummary };

@@ -183,11 +183,15 @@ const epointProtection2 = {
                     const cell = data[r][c];
 
                     // 任意单元格是保护的则直接此区域不允许
-                    if (cell != null && cell.epoint && cell.epoint.protected && !epointProtection2._checkUserRight(r, c)) {
+                    if (
+                        cell != null &&
+                        cell.epoint &&
+                        cell.epoint.protected &&
+                        !epointProtection2._checkUserRight(r, c)
+                    ) {
                         result = false;
                         return true;
                     }
-                    
                 }
             }
         });
@@ -211,3 +215,4 @@ const epointProtection2 = {
 };
 
 export default epointProtection2;
+export { epointProtection2 };
