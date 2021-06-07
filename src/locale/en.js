@@ -8893,7 +8893,8 @@ export default {
         print:"Print",
         epointClear: 'clear',
         epointInsert: 'insert',
-        epointProtection: 'protection'
+        epointProtection: 'protection',
+        epointSummary: 'smmary'
     },
     alternatingColors:{
         applyRange: 'Apply to range',

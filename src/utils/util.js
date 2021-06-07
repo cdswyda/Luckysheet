@@ -881,7 +881,59 @@ function arrayRemoveItem(array, item) {
         return '-' + group.toLowerCase();
     });
 }
-  
+/**
+ * debounce 大于间隔时间时才触发
+ * 连续触发时，仅当时间间隔大于指定时间才触发
+ *
+ * @param {function} fn 要处理的函数
+ * @param {number} delay 间隔时间 单位 ms
+ * @param {[object]} ctx 要绑定的上下文
+ * @returns debounce 后的新函数
+ */
+function debounce(fn, delay, ctx) {
+    delay = delay || 17;
+    var timer;
+    return function() {
+        var args = arguments;
+        var context = ctx || this;
+        clearTimeout(timer);
+        timer = setTimeout(function() {
+            fn.apply(context, args);
+        }, delay);
+    };
+}
+/**
+ * throttle 降低触发频率
+ * 连续触发时，降低执行频率到指定时间
+ *
+ * @param {function} fn 要处理的函数
+ * @param {number} delay 间隔时间 单位 ms
+ * @param {[object]} ctx 要绑定的上下文
+ * @returns throttle 后的新函数
+ */
+function throttle(fn, delay, ctx) {
+    delay = delay || 200;
+    var timer,
+        prevTime = +new Date();
+    return function() {
+        clearTimeout(timer);
+        var args = arguments;
+        var context = ctx || this;
+        var pastTime = +new Date() - prevTime;
+
+        if (pastTime >= delay) {
+            // 如果过去的时间已经大于间隔时间 则立即执行
+            fn.apply(context, args);
+            prevTime = +new Date();
+        } else {
+            // 过去的时间还没到 则等待
+            timer = setTimeout(function() {
+                fn.apply(context, args);
+                prevTime = +new Date();
+            }, delay - pastTime);
+        }
+    };
+}
 export {
     isJsonString,
     common_extend,
@@ -911,5 +963,7 @@ export {
     openSelfModel,
     createProxy,
     arrayRemoveItem,
-    camel2split
+    camel2split,
+    debounce,
+    throttle
 }

@@ -42,6 +42,7 @@ import {checkTheStatusOfTheSelectedCells} from '../global/api';
 import epointInsert from './epointInsert';
 import epointProtection from './epointProtection';
 import epointProtection2 from './epointProtection2';
+import epointSummary from './epointSummary';
 
 const menuButton = {
     "menu": '<div class="luckysheet-cols-menu luckysheet-rightgclick-menu luckysheet-menuButton ${subclass} luckysheet-mousedown-cancel" id="luckysheet-icon-${id}-menuButton">${item}</div>',
@@ -3015,6 +3016,10 @@ const menuButton = {
                 menuleft = menuleft - tlen + userlen;
             }
             mouseclickposition($menuButton, menuleft, $(this).offset().top+25, "lefttop");
+        });
+        // epoint summary
+        $('#luckysheet-icon-epoint-summary').on('click', function () {
+            epointSummary.showDialog();
         });
     },
     getQKBorder: function(width, type, color){

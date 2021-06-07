@@ -12,6 +12,7 @@ export const defaultToolbar = [
     '|',
 
     'epointInsert', 'epointProtection', 'epointProtection2', '|',
+    'epointSummary', '|' ,
 
     'currencyFormat',
     'percentageFormat',
@@ -105,8 +106,13 @@ export const toolbarIdMap = {
     epointClear: '#luckysheet-icon-epoint-clear',
     epointInsert: '#luckysheet-icon-epoint-insert',
 
+    // 保护
     epointProtection: '#luckysheet-icon-epoint-protection',
-    epointProtection2: '#luckysheet-icon-epoint-protection2'
+    epointProtection2: '#luckysheet-icon-epoint-protection2',
+
+    // 汇总
+    epointSummary: '#luckysheet-icon-epoint-summary',
+
 };
 
 // 创建工具栏按钮的html
@@ -894,6 +900,19 @@ export function createToolbarHtml() {
                 </div>
             </div>
         </div>`,
+        epointSummary: `<div class="luckysheet-toolbar-button-split-left luckysheet-toolbar-button luckysheet-inline-block"
+        data-tips="${toolbar.epointSummary}" id="luckysheet-icon-epoint-summary" role="button" style="user-select: none;">
+            <div class="luckysheet-toolbar-button-outer-box luckysheet-inline-block"
+            style="user-select: none;">
+                <div class="luckysheet-toolbar-menu-button-inner-box luckysheet-inline-block"
+                style="user-select: none;">
+                    <div class="luckysheet-toolbar-menu-button-caption luckysheet-inline-block"
+                    style="user-select: none;">
+                        ${toolbar.epointSummary}
+                    </div>
+                </div>
+            </div>
+        </div>`
     };
 
     const showtoolbar = luckysheetConfigsetting.showtoolbar;

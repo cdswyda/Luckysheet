@@ -38,6 +38,7 @@ import * as api from './global/api';
 import flatpickr from 'flatpickr'
 import Mandarin from 'flatpickr/dist/l10n/zh.js'
 import { initListener } from './controllers/listener';
+import eventEmitter from './utils/event';
 
 let luckysheet = {};
 
@@ -51,6 +52,7 @@ luckysheet = common_extend(api,luckysheet);
 
 //创建luckysheet表格
 luckysheet.create = function (setting) {
+    eventEmitter.clear();
     method.destroy()
     // Store original parameters for api: toJson
     Store.toJsonOptions = {}
