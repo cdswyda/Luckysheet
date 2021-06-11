@@ -223,11 +223,41 @@ function initEvent() {
     epointSummary.$el.on('click', '.epoint-summary-rule-item-remove', function() {
         var $item = $(this).closest('.epoint-summary-rule-item');
         var sheetId = $item[0].getAttribute('data-sheet');
-        var rangeId = $item[0].getAttribute('data-id');
+        var id = $item[0].getAttribute('data-id');
 
-        epointProtection.removeProtectedRange(rangeId, sheetId, false);
+        epointSummary.removeRule(id, sheetId, false);
         $item.remove();
     });
+}
+
+/**
+ * 获取行汇总情况下的结束行位置
+ * @param {number} r 开始行坐标
+ * @param {number} c1 开始列坐标
+ * @param {number} c2 结束列坐标
+ * @param {Array<Array<object>>} data 当前sheet数据
+ * @returns
+ */
+function getRowSummaryEnd(r, c1, c2, data) {
+    let endRow = Infinity;
+    for (let i = r + 1; i < data.length; i++) {
+        for (let j = c1; j <= c2; j++) {
+            let cell = data[i][j];
+            // 单元格一旦存在值或者公司则认为到此为止
+            if (cell && (cell.v || cell.m || cell.f)) {
+                endRow = i - 1;
+                return endRow;
+            }
+        }
+    }
+    return endRow;
+}
+function getRowSummaryRectHeight(r, c1, c2, data) {
+    var r2 = getRowSummaryEnd(r, c1, c2, data);
+    if (r2 === Infinity) {
+        return Infinity;
+    }
+    return r2 - r;
 }
 
 class TypeControl extends EventTarget {
@@ -328,6 +358,7 @@ const epointSummary = {
     closeDialog() {
         epointSummary.$el.hide();
         eventEmitter.off('rangeSelect', epointSummary._handleRangeSelet);
+        eventEmitter.off('sheetActivate');
 
         luckysheetsizeauto();
     },
@@ -476,10 +507,12 @@ const epointSummary = {
 
             // 行模式下 没有高度限制
             if (rule.type === 'row') {
-                rect1.h = Infinity;
+                // rect1.h = Infinity;
+                rect1.h = getRowSummaryRectHeight(rule.row1, rule.column1, rule.column2, file.data);
             }
             if (item.type === 'row') {
-                rect2.h = Infinity;
+                // rect2.h = Infinity;
+                rect2.h = getRowSummaryRectHeight(item.row1, item.column1, item.column2, file.data);
             }
 
             return rectCross(rect1, rect2);
@@ -525,6 +558,8 @@ const epointSummary = {
         initRightDialog();
         // 监听选区变化
         eventEmitter.on('rangeSelect', epointSummary._handleRangeSelet);
+        // 监听sheet切换
+        eventEmitter.on('sheetActivated', epointSummary.refreshDialogContent);
         // 隐藏其他的 右侧弹窗
         $('.luckysheet-modal-dialog-slider').hide();
 
@@ -578,6 +613,9 @@ const epointSummary = {
         setRangeShow(range);
     },
     refreshDialogContent() {
+        if (!isInitSummaryDialog) {
+            return;
+        }
         var ruleHtml = buildRuleHtml();
         epointSummary.$el.find('.epoint-summary-config-list').html(ruleHtml);
     }

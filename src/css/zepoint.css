@@ -120,11 +120,12 @@
 }
 .epoint-sheet-range-input {
     box-sizing: border-box;
-    width: calc(100% - 30px);
+    width: calc(100% - 32px);
     border: 0;
     padding: 0 10px;
     margin: 0;
-    line-height: 30px;
+    line-height: 28px;
+    height: 28px;
     vertical-align: top;
 }
 .epoint-sheet-range-input:focus {
@@ -149,10 +150,11 @@
     display: flex;
     justify-content: space-between;
     cursor: pointer;
+    justify-items: center;
 }
 .epoint-summary-rule-item-txt {
     background: #f0f0f0;
-    padding: 0 6px;
+    padding: 4px 6px;
     margin-right: 6px;
 }
 .epoint-summary-rule-item-remove {

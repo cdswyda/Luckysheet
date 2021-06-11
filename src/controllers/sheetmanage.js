@@ -30,6 +30,7 @@ import {changeSheetContainerSize, menuToolBarWidth} from './resize';
 import {zoomNumberDomBind} from './zoom';
 import menuButton from './menuButton';
 import method from '../global/method';
+import { eventEmitter } from '../utils/event';
 
 const sheetmanage = {
     generateRandomSheetIndex: function(prefix) {
@@ -1156,6 +1157,8 @@ const sheetmanage = {
 
         _this.storeSheetParamALL();
         _this.setCurSheet(index);
+
+        eventEmitter.fire('sheetActivated', {index, isPivotInitial, isNewSheet});
 
         let file = Store.luckysheetfile[_this.getSheetIndex(index)]
   
