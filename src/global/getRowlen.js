@@ -1,6 +1,6 @@
 import { luckysheetfontformat } from '../utils/util';
 import menuButton from '../controllers/menuButton';
-import { getcellvalue,checkstatusByCell } from './getdata';
+import { checkstatusByCell } from './getdata';
 import { colLocationByIndex } from './location';
 import { hasChinaword, isRealNull,checkWordByteLength } from './validate';
 import { isInlineStringCell } from '../controllers/inlineString';
@@ -77,6 +77,10 @@ function rowlenByRange(d, r1, r2, cfg) {
 
         if(currentRowLen != Store.defaultrowlen){
             cfg_clone["rowlen"][r] = currentRowLen;
+        }else{
+            if(cfg["rowlen"][r]){
+                cfg_clone["rowlen"][r] = cfg["rowlen"][r]
+            }
         }
     }
 
@@ -373,7 +377,6 @@ function getCellTextInfo(cell , ctx, option){
             }
 
             similarIndex++;
-
         }
         isInline = true;
     }
@@ -399,14 +402,6 @@ function getCellTextInfo(cell , ctx, option){
             return null;
         }
     }
-
-
-
-
-    // let measureText = getMeasureText(value, ctx);
-    // //luckysheetTableContent.measureText(value);
-    // let textWidth = measureText.width;
-    // let textHeight = measureText.actualBoundingBoxDescent + measureText.actualBoundingBoxAscent;
 
     if(tr=="3"){//vertical text
         ctx.textBaseline = 'top';
@@ -916,7 +911,7 @@ function getCellTextInfo(cell , ctx, option){
                         if(preMeasureText!=null){
                             spaceOrTwoByte = {
                                 index:i,
-                                str:preStr,
+                                str:preStr + lastWord,
                                 width:preTextWidth,
                                 height:preTextHeight,
                                 asc:preMeasureText.actualBoundingBoxAscent,
