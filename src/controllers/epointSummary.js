@@ -15,7 +15,7 @@ const DIALOG_ID = 'luckysheet-epoint-summary-dialog';
 const TYPE2TEXT = {
     row: '逐行汇总',
     count: '计数',
-    cum: '求和',
+    sum: '求和',
     avg: '求平均',
     max: '取最大',
     min: '取最小'
