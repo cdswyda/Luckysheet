@@ -9116,6 +9116,7 @@ export default {
         print              : '列印',
         epointClear        : '清除',
         epointInsert       : '插入',
+        epointValidation   : '校驗',
         epointProtection   : '保護',
         epointSummary      : '匯總'
     },

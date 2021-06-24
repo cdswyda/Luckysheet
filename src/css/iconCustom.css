@@ -99,6 +99,11 @@ input.luckysheet-mousedown-cancel:focus{
     height: 100%;
     fill: currentColor;
 }
-#luckysheet-icon-epoint-insert .luckysheet-toolbar-menu-button-caption {
+#luckysheet-icon-epoint-insert .luckysheet-toolbar-menu-button-caption,
+#luckysheet-icon-epoint-validation .luckysheet-toolbar-menu-button-caption {
     width: 55px;
+}
+#luckysheet-icon-epoint-inerst,
+#luckysheet-icon-epoint-validation {
+    margin-right: 10px;
 }

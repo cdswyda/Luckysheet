@@ -43,6 +43,7 @@ import epointInsert from './epointInsert';
 import epointProtection from './epointProtection';
 import epointProtection2 from './epointProtection2';
 import epointSummary from './epointSummary';
+import epointValidation from './epointValidation';
 
 const menuButton = {
     "menu": '<div class="luckysheet-cols-menu luckysheet-rightgclick-menu luckysheet-menuButton ${subclass} luckysheet-mousedown-cancel" id="luckysheet-icon-${id}-menuButton">${item}</div>',
@@ -2930,7 +2931,7 @@ const menuButton = {
                     luckysheetContainerFocus();
 
                     epointInsert.handle(itemvalue);
-                })
+                });
             }
 
             let userlen = $(this).outerWidth();
@@ -3005,6 +3006,39 @@ const menuButton = {
                     } else if (itemvalue === 'cancel-protect') {
                         epointProtection2.removeProtections();
                     }
+                });
+            }
+
+            let userlen = $(this).outerWidth();
+            let tlen = $menuButton.outerWidth();
+
+            let menuleft = $(this).offset().left;
+            if(tlen > userlen && (tlen + menuleft) > $("#" + Store.container).width()){
+                menuleft = menuleft - tlen + userlen;
+            }
+            mouseclickposition($menuButton, menuleft, $(this).offset().top+25, "lefttop");
+        });
+        // epoint 校验
+        $("#luckysheet-icon-epoint-validation").mousedown(function(e){
+            hideMenuByCancel(e);
+            e.stopPropagation();
+        }).on('click', function(){
+            let menuButtonId = $(this).attr("id")+"-menuButton";
+            let $menuButton = $("#"+menuButtonId);
+            if ($menuButton.length == 0){
+                let itemset = _this.createButtonMenu(epointValidation.menuItems);
+
+                let menu = replaceHtml(_this.menu, {"id": "epoint-validation", "item": itemset, "subclass": "", "sub": ""});
+
+                $("body").append(menu);
+                $menuButton = $("#"+menuButtonId).width(150);
+                // _this.focus($menuButton, '');
+
+                $menuButton.on("click", ".luckysheet-cols-menuitem", function(){
+                    $menuButton.hide();
+                    luckysheetContainerFocus();
+                    let $t = $(this), itemvalue = $t.attr("itemvalue");
+                    epointValidation.handle(itemvalue);
                 });
             }
 

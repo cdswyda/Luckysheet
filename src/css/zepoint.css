@@ -1,3 +1,24 @@
+/* #region lulu UI 样式调整 */
+.ui-select {
+    height: 32px;
+}
+.ui-select-button {
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+.ui-select-datalist {
+    top: 31px;
+}
+.ui-select-button,
+.active > a.ui-select-button {
+    border-radius: 0;
+}
+.ui-select-icon,
+.ui-select-text:only-child::after {
+    top: 5px;
+}
+/* #endregion */
+
 .luckysheet-modal-dialog-slider-content-cover {
     position: absolute;
     left: 0;
@@ -163,4 +184,33 @@
     text-align: center;
 }
 
+/* #endregion */
+
+/* #region validate */
+.epoint-form-item {
+    margin-bottom: 10px;
+}
+.epoint-form-label {
+    color: #5c5c5c;
+}
+.epoint-form-label.required:after {
+    content: '*';
+    color: red;
+}
+.epoint-validation-fn-dialog-content {
+    font-size: 14px;
+}
+.epoint-vfn-view {
+    background: #f2f2f2;
+    text-align: center;
+    padding: 8px;
+    line-height: 1.5;
+    min-height: 40px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+}
+.epoint-vfn-view-txt {
+    flex: 1;
+}
 /* #endregion */

@@ -11,7 +11,7 @@ export const defaultToolbar = [
     'epointClear',
     '|',
 
-    'epointInsert', 'epointProtection', 'epointProtection2', '|',
+    'epointInsert', 'epointValidation', 'epointProtection', 'epointProtection2', '|',
     'epointSummary', '|' ,
 
     'currencyFormat',
@@ -105,6 +105,7 @@ export const toolbarIdMap = {
 
     epointClear: '#luckysheet-icon-epoint-clear',
     epointInsert: '#luckysheet-icon-epoint-insert',
+    epointValidation: '#luckysheet-icon-epoint-validation',
 
     // 保护
     epointProtection: '#luckysheet-icon-epoint-protection',
@@ -868,6 +869,19 @@ export function createToolbarHtml() {
                 <div class="luckysheet-toolbar-button-inner-box luckysheet-inline-block"
                 style="user-select: none;">
                     <div class="luckysheet-toolbar-menu-button-caption luckysheet-inline-block" style="user-select: none;">插入</div>
+                    <div class="luckysheet-toolbar-menu-button-dropdown luckysheet-inline-block iconfont luckysheet-iconfont-xiayige"
+                    style="user-select: none;margin-left: 0px;margin-right: 4px;">
+                    </div>
+                </div>
+            </div>
+        </div>`,
+        epointValidation: `<div class="luckysheet-toolbar-select luckysheet-toolbar-menu-button luckysheet-inline-block" data-tips="${toolbar.epointValidation}"
+        id="luckysheet-icon-epoint-validation" role="button" style="user-select: none;">
+            <div class="luckysheet-toolbar-menu-button-outer-box luckysheet-inline-block"
+            style="user-select: none;">
+                <div class="luckysheet-toolbar-button-inner-box luckysheet-inline-block"
+                style="user-select: none;">
+                    <div class="luckysheet-toolbar-menu-button-caption luckysheet-inline-block" style="user-select: none;">${toolbar.epointValidation}</div>
                     <div class="luckysheet-toolbar-menu-button-dropdown luckysheet-inline-block iconfont luckysheet-iconfont-xiayige"
                     style="user-select: none;margin-left: 0px;margin-right: 4px;">
                     </div>

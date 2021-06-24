@@ -9118,6 +9118,7 @@ export default {
         print:"打印",
         epointClear: '清除',
         epointInsert: '插入',
+        epointValidation: '校验',
         epointProtection: '保护',
         epointSummary: '汇总'
     },

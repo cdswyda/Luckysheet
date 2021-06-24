@@ -91,8 +91,8 @@ const paths = {
 
      //plugins src
     pluginsCss: ['src/plugins/css/*.css'],
-    plugins: ['src/plugins/*.css'],
-    css:['src/css/*.css','node_modules/flatpickr/dist/themes/light.css'],
+    plugins: ['src/plugins/*.css', 'src/lulu/theme/pure/css/common/ui/Select.css'],
+    css:['node_modules/flatpickr/dist/themes/light.css', 'src/css/*.css'],
     pluginsJs:[
         // 'node_modules/jquery/dist/jquery.min.js',
         'node_modules/uuid/dist/umd/uuid.min.js',
@@ -106,7 +106,8 @@ const paths = {
         'src/plugins/js/lodash.min.js',
         'src/plugins/js/jstat.min.js',
         'src/plugins/js/crypto-api.min.js',
-        'src/plugins/js/jquery.sPage.min.js'
+        'src/plugins/js/jquery.sPage.min.js',
+        'src/lulu/theme/pure/js/common/ui/Select.js'
     ],
 
     //plugins concat
@@ -190,7 +191,7 @@ async function core() {
             // 	// minimize: isProductionEnv,
             // }),
             production && terser(), // minify, but only in production
-            babel(babelConfig)
+            production && babel(babelConfig)
         ],
     });
 
@@ -279,9 +280,16 @@ function copyStaticCssImages(){
     return src(paths.staticCssImages)
         .pipe(dest(paths.destStaticCssImages));
 }
+// function copyLulu() {
+//     return src([
+//         './src/lulu/**/*.*',
+//         '!./src/lulu/**/*.zip',
+//         '!./src/lulu/**/*.scss',
+//     ]).pipe(dest('./dist/lulu'));
+// }
 
 const dev = series(clean, parallel(pluginsCss, plugins, css, pluginsJs, copyStaticHtml, copyStaticFonts, copyStaticAssets, copyStaticImages, copyStaticExpendPlugins, copyStaticDemoData, copyStaticCssImages, core), watcher, serve);
-const build = series(clean, parallel(pluginsCss, plugins, css, pluginsJs, copyStaticHtml, copyStaticFonts, copyStaticAssets, copyStaticImages, copyStaticExpendPlugins, copyStaticDemoData, copyStaticCssImages, core));
+const build = series(clean, parallel( pluginsCss, plugins, css, pluginsJs, copyStaticHtml, copyStaticFonts, copyStaticAssets, copyStaticImages, copyStaticExpendPlugins, copyStaticDemoData, copyStaticCssImages, core));
 
 exports.dev = dev;
 exports.build = build;

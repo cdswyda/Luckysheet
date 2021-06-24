@@ -8893,6 +8893,7 @@ export default {
         print:"Print",
         epointClear: 'clear',
         epointInsert: 'insert',
+        epointValidation: 'validation',
         epointProtection: 'protection',
         epointSummary: 'smmary'
     },
