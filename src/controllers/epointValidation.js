@@ -3,7 +3,7 @@
  * @Author: chends
  * @Date: 2021-06-21 10:51:19
  * @Last Modified by: chends
- * @Last Modified time: 2021-06-21 17:50:56
+ * @Last Modified time: 2021-06-28 09:54:06
  */
 import Store from '../store';
 import dataVerificationCtrl from './dataVerificationCtrl';
@@ -16,6 +16,7 @@ import {
 } from './protection';
 
 import epointValidationFn from './epointValidationFn';
+import epointValidationView from './epointValidationView';
 
 function isAllowEdit() {
     if (!checkProtectionNotEnable(Store.currentSheetIndex)) {
@@ -57,13 +58,16 @@ const epointValidation = {
         { text: '', value: 'split', example: '' },
         { text: '查看所有校验', value: 'view-validations', example: '' }
     ],
-    handle: function(key) {
+    handle(key) {
         console.log(key);
         if (key === 'data-validation') {
             return handleDataValidation();
         }
         if (key === 'data-formula-validation') {
             return epointValidationFn.show();
+        }
+        if (key === 'view-validations') {
+            return epointValidationView.show();
         }
     }
 };

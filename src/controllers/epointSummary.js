@@ -120,7 +120,7 @@ function initRightDialog(params) {
         <div class="luckysheet-modal-dialog-slider-title"> <span>汇总规则</span> <span id="${DIALOG_ID}-close" class="luckysheet-modal-dialog-slider-close" style="display:none;" title="关闭"><i class="fa fa-times" aria-hidden="true"></i></span> </div>
         <div class="luckysheet-modal-dialog-slider-content">
             ${CONTENT_HTML}
-            <div class="luckysheet-modal-dialog-slider-content-cover" </div>
+            <div class="luckysheet-modal-dialog-slider-content-cover"></div>
         </div>
     </div>
     `;

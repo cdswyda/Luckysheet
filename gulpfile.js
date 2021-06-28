@@ -190,8 +190,8 @@ async function core() {
             // 	extract: true,
             // 	// minimize: isProductionEnv,
             // }),
-            production && terser(), // minify, but only in production
-            production && babel(babelConfig)
+            babel(babelConfig),
+            production && terser() // minify, but only in production
         ],
     });
 

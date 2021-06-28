@@ -7,6 +7,7 @@ import { selectionCopyShow } from './select';
 import { setRangeShow } from '../global/api';
 import dataVerificationCtrl from './dataVerificationCtrl';
 import tooltip from '../global/tooltip';
+import epointValidationView from './epointValidationView';
 
 function tips(content) {
     tooltip.info('<i class="fa fa-exclamation-triangle"></i>', content);
@@ -326,6 +327,27 @@ const epointValidationFn = {
     _onTargetConfrim() {
         epointValidationFn._onRangeConfirm('target');
     },
+    // 根据存储数据获取用于在右侧列表显示的数据
+    getViewData(item) {
+        const data = $.extend({}, item);
+        let txt = '';
+
+        txt += data.s_f;
+        txt += '(' + data.s + ') ';
+
+        txt += CONDITION_MAP[data.c];
+
+        txt += ' ';
+
+        if (data.t_f) {
+            txt += data.t_f;
+            txt += '(' + data.t + ')';
+        } else {
+            txt += data.t;
+        }
+        data.txt = txt;
+        return data;
+    },
     makeViewText() {
         console.log(this._currentData);
         var txt = '';
@@ -410,7 +432,7 @@ const epointValidationFn = {
 
         // 组织数据格式
         const item = {
-            id: '', // 标识 来源区域 + 公式 + 条件作为id标识
+            id: '', // 标识
             s: '', // source
             s_f: '', // source_fn
             c: '', // condition
@@ -453,7 +475,7 @@ const epointValidationFn = {
             if (!targetRange || !targetRange.length) {
                 return tips('输入的目标单元格范围无效');
             } else {
-                item.target = data.target;
+                item.t = data.target;
             }
 
             // target 为区域时才需要公式
@@ -478,7 +500,26 @@ const epointValidationFn = {
         if (!isIn) {
             formulaValidation.push(item);
         }
+        epointValidationView.refresh();
         this.$dialog.hide();
+    },
+    removeItemById(id, sheetId) {
+        if (sheetId == undefined) {
+            sheetId = Store.currentSheetIndex;
+        }
+        const file = Store.luckysheetfile[getSheetIndex(sheetId)];
+        if (!file.config || !file.config.formulaValidation || !file.config.formulaValidation.length) {
+            return;
+        }
+
+        const formulaValidation = file.config.formulaValidation;
+
+        for (let i = 0; i < formulaValidation.length; i++) {
+            if (formulaValidation[i].id === id) {
+                formulaValidation.splice(i, 1);
+                break;
+            }
+        }
     },
     _getValidateConfig(id) {
         const file = Store.luckysheetfile[getSheetIndex(Store.currentSheetIndex)];
