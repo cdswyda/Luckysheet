@@ -8895,7 +8895,8 @@ export default {
         epointInsert: 'insert',
         epointValidation: 'validation',
         epointProtection: 'protection',
-        epointSummary: 'smmary'
+        epointSummary: 'smmary',
+        epointRequired: 'required'
     },
     alternatingColors:{
         applyRange: 'Apply to range',

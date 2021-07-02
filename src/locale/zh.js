@@ -9120,7 +9120,8 @@ export default {
         epointInsert: '插入',
         epointValidation: '校验',
         epointProtection: '保护',
-        epointSummary: '汇总'
+        epointSummary: '汇总',
+        epointRequired: '必填'
     },
     alternatingColors:{
         applyRange: '应用范围',

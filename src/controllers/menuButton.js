@@ -44,6 +44,7 @@ import epointProtection from './epointProtection';
 import epointProtection2 from './epointProtection2';
 import epointSummary from './epointSummary';
 import epointValidation from './epointValidation';
+import epointRequired from './epointRequired';
 
 const menuButton = {
     "menu": '<div class="luckysheet-cols-menu luckysheet-rightgclick-menu luckysheet-menuButton ${subclass} luckysheet-mousedown-cancel" id="luckysheet-icon-${id}-menuButton">${item}</div>',
@@ -3054,6 +3055,11 @@ const menuButton = {
         // epoint summary
         $('#luckysheet-icon-epoint-summary').on('click', function () {
             epointSummary.showDialog();
+        });
+
+        // epoint required
+        $('#luckysheet-icon-epoint-required').on('click', function () {
+            epointRequired.toggleRequired();
         });
     },
     getQKBorder: function(width, type, color){

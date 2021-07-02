@@ -12,6 +12,7 @@ export const defaultToolbar = [
     '|',
 
     'epointInsert', 'epointValidation', 'epointProtection', 'epointProtection2', '|',
+    'epointRequired' , '|',
     'epointSummary', '|' ,
 
     'currencyFormat',
@@ -113,6 +114,8 @@ export const toolbarIdMap = {
 
     // 汇总
     epointSummary: '#luckysheet-icon-epoint-summary',
+    // 必填
+    epointRequired: '#luckysheet-icon-epoint-required',
 
 };
 
@@ -924,6 +927,16 @@ export function createToolbarHtml() {
                     style="user-select: none;">
                         ${toolbar.epointSummary}
                     </div>
+                </div>
+            </div>
+        </div>`,
+        epointRequired: `<div class="luckysheet-toolbar-button luckysheet-inline-block" data-tips="${toolbar.epointRequired}"
+        id="luckysheet-icon-epoint-required" role="button" style="user-select: none;">
+            <div class="luckysheet-toolbar-button-outer-box luckysheet-inline-block"
+            style="user-select: none;">
+                <div class="luckysheet-toolbar-button-inner-box luckysheet-inline-block"
+                style="user-select: none;">
+                    <div class="luckysheet-toolbar-menu-button-caption luckysheet-inline-block" style="user-select: none;">*</div>
                 </div>
             </div>
         </div>`

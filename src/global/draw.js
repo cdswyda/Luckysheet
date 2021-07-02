@@ -21,6 +21,7 @@ import locale from '../locale/locale';
 import sheetmanage from '../controllers/sheetmanage';
 import epointProtection from '../controllers/epointProtection';
 import epointProtection2 from '../controllers/epointProtection2';
+import epointRequired from '../controllers/epointRequired';
 
 function luckysheetDrawgridRowTitle(scrollHeight, drawHeight, offsetTop) {
     if (scrollHeight == null) {
@@ -1155,6 +1156,8 @@ let nullCellRender = function(r, c, start_r, start_c, end_r, end_c,luckysheetTab
         if (epointProtection.isInProtections(r, c) || epointProtection2.isInProtections(r, c)) {
             // luckysheetTableContent.fillStyle = `rgba(247,247,247,1)`;
             luckysheetTableContent.fillStyle = epointProtection2.fillStyle;
+        } else if (epointRequired.isRequired(Store.flowdata[r][c])) {
+            luckysheetTableContent.fillStyle = epointRequired.fillStyle;
         } else {
             luckysheetTableContent.fillStyle = "#FFFFFF";
         }

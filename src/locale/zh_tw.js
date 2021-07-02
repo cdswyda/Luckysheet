@@ -9118,7 +9118,8 @@ export default {
         epointInsert       : '插入',
         epointValidation   : '校驗',
         epointProtection   : '保護',
-        epointSummary      : '匯總'
+        epointSummary      : '匯總',
+        epointRequired     : '必填'
     },
     alternatingColors: {
         applyRange        : '應用範圍',
