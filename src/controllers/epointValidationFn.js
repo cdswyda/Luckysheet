@@ -4,7 +4,6 @@ import locale from '../locale/locale';
 import Store from '../store';
 import { getRangetxt, getSheetIndex } from '../methods/get';
 import { selectionCopyShow } from './select';
-import { setRangeShow } from '../global/api';
 import dataVerificationCtrl from './dataVerificationCtrl';
 import tooltip from '../global/tooltip';
 import eventEmitter from '../utils/event';
@@ -541,6 +540,15 @@ const epointValidationFn = {
 
         this.restoreData();
         this.$dialog.show();
+    },
+    /**
+     * 设置公式计算时默认选取的 sheet
+     * @param {string | number} sheetId sheet 的 index 即 id
+     * luckysheet_getcelldata 默认从激活的sheet 取数据 假设当前激活的sheet1 进行sheet2的公式验证将不对，提供此方法在进行sheet2验证的的时候手动设置
+     */
+    setFnCalcActiveSheet(sheetId) {
+        window.luckysheet_getcelldata_cache = {};
+        Store.calculateSheetIndex = sheetId;
     }
 };
 

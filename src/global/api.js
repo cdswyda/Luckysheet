@@ -6749,3 +6749,4 @@ export * as pako from 'pako';
 
 export { epointSummary } from '../controllers/epointSummary';
 export { epointProtection2 } from '../controllers/epointProtection2';
+export { epointValidationFn } from '../controllers/epointValidationFn';
