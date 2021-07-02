@@ -7,7 +7,7 @@ import { selectionCopyShow } from './select';
 import { setRangeShow } from '../global/api';
 import dataVerificationCtrl from './dataVerificationCtrl';
 import tooltip from '../global/tooltip';
-import epointValidationView from './epointValidationView';
+import eventEmitter from '../utils/event';
 
 function tips(content) {
     tooltip.info('<i class="fa fa-exclamation-triangle"></i>', content);
@@ -500,7 +500,8 @@ const epointValidationFn = {
         if (!isIn) {
             formulaValidation.push(item);
         }
-        epointValidationView.refresh();
+        // 派发新增事件
+        eventEmitter.fire('epointValidationFn.addItem');
         this.$dialog.hide();
     },
     removeItemById(id, sheetId) {

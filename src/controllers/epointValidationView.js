@@ -32,7 +32,7 @@ function initRightDialog(me) {
     `;
     let html = `
     <div id="${DIALOG_ID}" class="luckysheet-modal-dialog-slider" style="display:none;">
-        <div class="luckysheet-modal-dialog-slider-title"> <span>汇总规则</span> <span id="${DIALOG_ID}-close" class="luckysheet-modal-dialog-slider-close" title="关闭"><i class="fa fa-times" aria-hidden="true"></i></span> </div>
+        <div class="luckysheet-modal-dialog-slider-title"> <span>校验规则</span> <span id="${DIALOG_ID}-close" class="luckysheet-modal-dialog-slider-close" title="关闭"><i class="fa fa-times" aria-hidden="true"></i></span> </div>
         <div class="luckysheet-modal-dialog-slider-content">
             ${CONTENT_HTML}
             <div class="luckysheet-modal-dialog-slider-content-cover"> </div>
@@ -53,7 +53,8 @@ function initEvent(me) {
         // 关闭
         .on('click', `#${DIALOG_ID}-close`, () => me.closeDialog)
         // 公式验证规则移除
-        .on('click', `.epoint-validation-view-fn-item-remove`, me._handleVFNRemove);
+        .on('click', `.epoint-validation-view-fn-item-remove`, me._handleVFNRemove)
+        .on('click', `.epoint-validation-view-fn-item-config`, me._handleVFNConfig);
 }
 
 function renderItem(vitem, sheet) {
@@ -67,7 +68,6 @@ function renderItem(vitem, sheet) {
         <div class="epoint-validation-view-fn-item-operate"><span class="epoint-validation-view-fn-item-config luckysheet-iconfont-shezhi iconfont"></span><span class="epoint-validation-view-fn-item-remove luckysheet-iconfont-shanchu iconfont"></span></div>
     </div>
     `;
-    
 }
 
 function buildHtml() {
@@ -139,9 +139,13 @@ const epointValidationView = {
         this.$el
             .off('mouseenter.epoint-validation-view', '.epoint-validation-view-fn-item')
             .on('mouseenter.epoint-validation-view', '.epoint-validation-view-fn-item', this._handleMouseEnter);
+
+        eventEmitter.on('epointValidationFn.addItem', () => this.refreshDialogContent());
     },
     _unBindShowEvent() {
         this.$el.off('mouseenter.epoint-validation-view', '.epoint-validation-view-fn-item');
+
+        eventEmitter.off('epointValidationFn.addItem');
     },
     _handleMouseEnter() {
         var sheetId = this.getAttribute('data-sheet');
@@ -159,6 +163,13 @@ const epointValidationView = {
 
         epointValidationFn.removeItemById(id, sheetId);
         $item.remove();
+    },
+    _handleVFNConfig() {
+        var $item = $(this).closest('.epoint-validation-view-fn-item');
+        var sheetId = $item[0].getAttribute('data-sheet');
+        var id = $item[0].getAttribute('data-id');
+
+        epointValidationFn.showDialogById(id, sheetId);
     }
 };
 
