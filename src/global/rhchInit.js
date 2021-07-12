@@ -29,7 +29,8 @@ export default function rhchInit(rowheight, colwidth) {
         if(!luckysheetConfigsetting.enableAddRow && !luckysheetConfigsetting.enableAddBackTop){
             Store.rh_height += 29;
         }else{
-            Store.rh_height += 80;  //最底部增加空白
+            // Store.rh_height += 80;  //最底部增加空白
+            Store.rh_height += 58;  //最底部增加空白
         }
        
     }
@@ -39,7 +40,8 @@ export default function rhchInit(rowheight, colwidth) {
         Store.visibledatacolumn = [];
         Store.ch_width = 0;
 
-        let maxColumnlen = 120;
+        // let maxColumnlen = 120;
+        let maxColumnlen = 20;
 
         for (let c = 0; c < colwidth; c++) {
             let firstcolumnlen = Store.defaultcollen;
